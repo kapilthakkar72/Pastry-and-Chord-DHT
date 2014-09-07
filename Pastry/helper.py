@@ -1,14 +1,20 @@
-
+import random
 import os.path
 
-ipAddress = 105206215100
-
 def generateIpAddress():
-	#check
-	return ++ ipAddress
+	return int(ipPart()+ipPart()+ipPart()+ipPart())
+	
+	
+def ipPart():
+	return str(random.randint(0,255))
 
-#length of the prefix shared between k1 & k2
 def shl(k1, k2):
 	tempList = [str(k1),str(k2)]
 	return len(os.path.commonprefix(tempList))
+
+def hexToInt(hexVal):
+	return int(hexVal, 16)
+
+def isNodeAlive(N):
+	return N!=None and N.nodeKey!=None
 
