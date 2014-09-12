@@ -13,7 +13,8 @@ class MyNode:
 		#self.neighborhoodSet = [None for x in xrange(2**b)]
 		
 		self.routingTable = [[]]
-		self.leafSet = []
+		self.lowLeafSet = []
+		self.UpLeafSet = []
 		self.neighborhoodSet = []
 
 		self.ipAddress = ipAddress

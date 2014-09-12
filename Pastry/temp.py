@@ -1,19 +1,3 @@
-from node import MyNode
-import helper
+A = [[1,2,3],[3,4,5]]
 
-
-X = MyNode(helper.generateIpAddress())
-Y = MyNode(helper.generateIpAddress())
-
-list1 = [X,Y]
-l2 = [X]
-
-del X
-print list1[0].nodeKey
-print l2[0].nodeKey
-print X.nodeKey
-X.nodeKey = None
-#X = list.remove(X)
-
-print list1[0].nodeKey
-print l2[0].nodeKey
+print len(A)
