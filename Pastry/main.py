@@ -22,3 +22,7 @@ def addNewNode():
     r = operations.add_node(A, X)
     if(r != -1):
         print "node: " + str(X) + "added successfully"
+        
+def lookUp(S, D):
+    return operations.route(S, D)
+    

@@ -16,6 +16,7 @@ class MyNode:
 		self.lowLeafSet = []
 		self.UpLeafSet = []
 		self.neighborhoodSet = []
+		self.isNodeActive = True
 
 		self.ipAddress = ipAddress
 

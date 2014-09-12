@@ -16,5 +16,5 @@ def hexToInt(hexVal):
 	return int(hexVal, 16)
 
 def isNodeAlive(N):
-	return N!=None and N.nodeKey!=None
+	return N!=None and N.isNodeActive
 
