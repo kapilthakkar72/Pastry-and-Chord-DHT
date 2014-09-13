@@ -1,4 +1,5 @@
 import hashlib
+import random
 
 class MyNode:	
 	nodeCount = 0
@@ -14,11 +15,12 @@ class MyNode:
 		
 		self.routingTable = [[]]
 		self.lowLeafSet = []
-		self.UpLeafSet = []
+		self.upLeafSet = []
 		self.neighborhoodSet = []
 		self.isNodeActive = True
 
 		self.ipAddress = ipAddress
+		self.coordinates = [random.randint(0,1000), random.randint(0,1000)]
 
 		temp = str(ipAddress)
 		temp = temp.encode('utf-8')

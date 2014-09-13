@@ -1,3 +1,6 @@
-A = [[1,2,3],[3,4,5]]
+from math import sqrt
 
-print len(A)
+d = [[1,2,4],[4,5,5]]
+
+
+print sqrt(- (6-4)**2 + (4-3)**2)

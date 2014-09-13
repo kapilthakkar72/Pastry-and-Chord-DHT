@@ -4,12 +4,16 @@ from constants import nodes, neighborSetLen, lowLeafSetLen, \
 
 '''A : Existing node
 ...X : New node'''
-from helper import isNodeAlive
+from helper import isNodeAlive, getMinLeaf, getMaxLeaf, getRelativeDistance, \
+	getNumericDistance, getClosestNode
 
-def add_node(A, X):
+def add_node(X):
+	# Getting the neighbors
+	A = helper.getClosestNode(nodes, X)
+		
+	nodes.append(X)
 	# Nothing to be done if it's the first node
 	if(A == None):
-		nodes.append(X)
 		return
 	
 	routePath, Z = route(A, X)
@@ -22,7 +26,6 @@ def add_node(A, X):
 	updateNeighborSet(A, X)
 	updateLeafSet(Z, X)
 	
-	nodes.append(X)
 	# Sending state to other nodes
 	updateOthers(X)
 	
@@ -44,9 +47,9 @@ def updateNeighborSet(A, X):
 		X.neighborhoodSet.append(node)
 		i += 1
 
-def updateLeafSet(Z, X):	
+def updateLeafSet(Z, X):
 	# Taking leafSet from Z
-	t_leafSet = Z.lowLeafSet + Z.UpLeafSet
+	t_leafSet = Z.lowLeafSet + Z.upLeafSet
 	for t_leaf in t_leafSet:
 		if(len(X.lowLeafSet) < lowLeafSetLen and t_leaf.nodeKey < X.nodeKey):
 				X.lowLeafSet.append(t_leaf)
@@ -56,15 +59,42 @@ def updateLeafSet(Z, X):
 def updateOthers(X):
 	# updating neighbors of X with X
 	for neighbor in X.neighborhoodSet:
+		# adding X into the neighborhoodSet of neighbor if not enough neighbors
 		if(len(neighbor.neighborhoodSet) < neighborSetLen):
 			neighbor.neighborhoodSet.append(X)
-	
+			break
+		# replacing neighbor of neighbor with X if more closer
+		for neighborOfNeighbor in neighbor.neighborhoodSet:
+			if(getRelativeDistance(neighborOfNeighbor, neighbor) > getRelativeDistance(X, neighbor)):
+				neighbor.neighborhoodSet.remove(neighborOfNeighbor)
+				neighbor.neighborhoodSet.append(X)
+				break
+
 	# updating leafs of X with X
-	for leaf in X.leafSet:
+	t_leafSet = X.lowLeafSet + X.upLeafSet
+	for leaf in t_leafSet:
+		# adding X into the leafSet of leaf if not enough leafs
 		if(len(leaf.lowLeafSet) < lowLeafSetLen and X.nodeKey < leaf.nodeKey):
 				leaf.lowLeafSet.append(X)
+				break
 		elif(len(leaf.upLeafSet) < upLeafSetLen and X.nodeKey > leaf.nodeKey):
 				leaf.upLeafSet.append(X)
+				break
+		
+		# replacing leaf of leaf with X if more numerically closer
+		t_leafOfLeafSet = leaf.lowLeafSet + leaf.upLeafSet
+		for leafOfLeaf in t_leafOfLeafSet:
+			if leafOfLeaf in leaf.lowLeafSet and X.nodeKey < leaf.nodeKey:
+				if(getNumericDistance(leafOfLeaf, leaf) > getNumericDistance(X, leaf)):
+					leaf.lowLeafSet.remove(leafOfLeaf)
+					leaf.lowLeafSet.append(X)
+					break
+			if leafOfLeaf in leaf.upLeafSet and X.nodeKey > leaf.nodeKey:
+				if(getNumericDistance(leafOfLeaf, leaf) > getNumericDistance(X, leaf)):
+					leaf.upLeafSet.remove(leafOfLeaf)
+					leaf.upLeafSet.append(X)
+					break
+				
 	
 	# updating nodes in routing table with X
 	prefixLen = 0
@@ -75,19 +105,6 @@ def updateOthers(X):
 			if(not(isNodeAlive(routeTableEntry))):
 				N.routingTable[prefixLen][int(X.nodeKey[prefixLen], 16)] = X
 
-def getMinDistNode(nodeSet, X):
-	minDist = 100000
-	nearestNode = None
-	for node in nodeSet:
-		dist = int(X.nodeKey) - int(node.nodeKey)
-		if (minDist > dist):
-			minDist = dist
-			nearestNode = node
-	return nearestNode
-
-def getDistance(A1, A2):
-	return int(A1.nodeKey) - int(A2.nodeKey)
-
 def route(A, X):
 	routePath = []
 	while(1):
@@ -95,8 +112,8 @@ def route(A, X):
 		'''TO-DO:'''  # check if while condition needs to be changed
 		
 		# search in leafSet
-		leafSet = A.lowLeafSet + A.UpLeafSet
-		if(leafSet[0].nodeKey <= X.nodeKey >= leafSet[-1].nodeKey):
+		leafSet = A.lowLeafSet + A.upLeafSet
+		if(getMinLeaf(A).nodeKey <= X.nodeKey >= getMaxLeaf(A).nodeKey):
 			leafSet.append(X)  # Adding the currentNode in the leafSet...currentNode can be nearest
 			nearestleaf = [leafSet, A] 
 			return routePath, nearestleaf
@@ -105,19 +122,19 @@ def route(A, X):
 		prefixLen = helper.shl(A.nodeKey, X.nodeKey)
 		row = prefixLen
 		col = int(X.nodeKey[prefixLen], 16)
-		distFromA = getDistance(A, X)
+		distFromA = helper.getNumericDistance(A, X)
 		routeTableEntry = A.routingTable[row][col]
 		if(isNodeAlive(routeTableEntry)):
 			A = routeTableEntry
 			continue  # forwarded to the closer node
 		else:
-			#repair the routingTableEntry
-			repairRouteTableEntry(A, row, col)
-			#Send to numerically closer node			
+			# repair the routingTableEntry
+			'''repairRouteTableEntry(A, row, col)'''  # commented here since handled in the deletion
+			# Send to numerically closer node			
 			t_list = A.leafSet + A.neighborhoodSet + A.routingTable[row]
 			for node in t_list:
 				t_prefixLen = helper.shl(node, X.nodeKey)
-				t_dist = getDistance(node, X)
+				t_dist = helper.getNumericDistance(node, X)
 				if(t_prefixLen >= prefixLen and t_dist < distFromA):
 					A = nodes
 					continue
@@ -125,12 +142,63 @@ def route(A, X):
 		return routePath, A
 	
 def repairRouteTableEntry(A, row, col):
-	#asking nodes in the same row for replacement node
+	# asking nodes in the same row for replacement node
 	for r in range(row, len(A.routingTable)):
 		for c in range(0, len(A.routingTable[r])):
 			t_node = A.routingTable[r][c]
-			if(c!=col and isNodeAlive(t_node)):
+			if(c != col and isNodeAlive(t_node)):
 				t_node_routeTableEntry = t_node.routingTable[row][col]
 				if(isNodeAlive(t_node_routeTableEntry)):
 					A.routingTable[row][col] = t_node_routeTableEntry
 					return
+
+# Iterating over all the nodes in the network & repairing the failed entry 
+def nodeDeleted(X):
+	X.isNodeActive = False
+	for node in nodes:
+		# Repair leaf set
+		if X in node.upLeafSet:
+			node.upLeafSet.remove(X)
+			temp = getMaxLeaf(node)
+			
+			t_leafSet = temp.lowLeafSet + temp.upLeafSet
+			for leaf in t_leafSet:
+				if leaf.nodeKey > node.nodeKey and leaf not in node.upLeafSet and isNodeAlive(leaf):
+					node.upLeafSet.append(leaf)
+					break
+
+		elif X in node.downLeafSet:
+			node.downLeafSet.remove(X)
+			temp = getMinLeaf(node)
+			
+			t_leafSet = temp.lowLeafSet + temp.upLeafSet
+			for leaf in t_leafSet:
+				if leaf.nodeKey < node.nodeKey and leaf not in node.downLeafSet and isNodeAlive(leaf):
+					node.downLeafSet.append(leaf)
+					break
+				
+		# Repair neighborhood set
+		if X in node.neighborhoodSet:
+			node.neighborhoodSet.remove(X)
+			t_neighborOfNeighborList = []
+			# getting all the neighbor of neighbors
+			for neighbor in node.neighborhoodSet:
+				if(isNodeAlive(neighbor)):
+					t_neighborOfNeighborList += neighbor.neighborhoodSet
+				
+			closestNeighborOfNeighbor = getClosestNode(t_neighborOfNeighborList, node)
+			node.neighborhoodSet.append(closestNeighborOfNeighbor)
+			break
+		
+		# Repair routing table
+		for routeTableRow in node:
+			try:
+				if X in routeTableRow:
+					row = node.index(routeTableRow)
+					col = routeTableRow.index(X)
+					break
+			except ValueError:
+				continue
+		
+		repairRouteTableEntry(node, row, col)
+			
