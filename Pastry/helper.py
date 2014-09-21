@@ -1,7 +1,7 @@
 import random
 import os.path
 from math import sqrt
-from constants import INFINITY
+from constants import INFINITY, nodes
 
 def generateIpAddress():
 	return int(ipPart() + ipPart() + ipPart() + ipPart())	
@@ -21,13 +21,13 @@ def isNodeAlive(N):
 
 def getNumericDistance(A1, A2):
 	if not(isNodeAlive(A1)) or not(isNodeAlive(A2)):
-		print "Inside getNumericDistance : either of the node is not alive"
+		#print "Inside getNumericDistance : either of the node is not alive"
 		return INFINITY  # returning INFINITY if either of the node is not alive
-	return abs(int(A1.nodeKey) - int(A2.nodeKey))
+	return abs(int(A1.nodeKey, 16) - int(A2.nodeKey, 16))
 
 def getRelativeDistance(A1, A2):
 	if not(isNodeAlive(A1)) or not(isNodeAlive(A2)):
-		print "Inside getRelativeDistance : either of the node is not alive"
+		#print "Inside getRelativeDistance : either of the node is not alive"
 		return INFINITY  # returning INFINITY if either of the node is not alive
 	
 	yDiff = A1.coordinates[1] - A2.coordinates[1]
@@ -71,7 +71,72 @@ def getMaxDistNode(nodeSet, X):
 	return farthestNode
 
 def getMinLeaf(A):
-	return getMaxDistNode(A.lowLeafSet, A)  # minLeaf will have the max distance
+	return getMaxDistNode(A.downLeafSet, A)  # minLeaf will have the max distance
 
 def getMaxLeaf(A):
-	return getMaxDistNode(A.upLeafSet, A)  # maxLeaf will have the max distance 
+	return getMaxDistNode(A.upLeafSet, A)  # maxLeaf will have the max distance
+
+'''
+def getRouteTableEntry(A, row, col):
+	try:
+		return A.routingTable[row][col]
+	except IndexError:
+		return None
+	
+def setRouteTableEntry(A, row, col, X):
+	''''''Not implemented''''''
+
+def getRouteTableRow(A, row):
+	try:
+		return A.routingTable[row]
+	except IndexError:
+		return []
+
+'''
+	
+	
+def plist(l):
+	for entry in l:
+		print (entry)
+
+def printRoutingTable(routingTable):
+	i = 0
+	for routeRow in routingTable:
+		j = 0
+		for entry in routeRow:
+			if(entry != None):
+				print ("[" + str(i) + "]" + "[" + str(j) + "]")
+				print (entry)
+			j = j + 1
+		i = i + 1
+
+def printNode(node):
+	print ("\n")
+	print ("nodeId: " + str(node.id))
+	print ("nodeKey: " + node.nodeKey) 
+	print ("neighborhoodSet: ")
+	plist(node.neighborhoodSet)
+	print ("downLeafSet: ")
+	plist(node.downLeafSet)
+	print ("upLeafSet: ")
+	plist(node.upLeafSet) 
+	print ("routePath: ")
+	plist(node.routePath)
+	print ("routingTable: ")
+	printRoutingTable(node.routingTable)
+
+def printNodes():
+	for node in nodes:
+		printNode(node);
+		
+def isEligibleDownLeaf(N1, N2):
+	key1 = N1.nodeKey
+	key2 = N2.nodeKey
+	
+	if  key1 < key2 and shl(key1, key2)>3:
+		return True
+	return False
+
+def isEligibleUpLeaf(N1, N2):
+	return isEligibleDownLeaf(N2, N1)
+		

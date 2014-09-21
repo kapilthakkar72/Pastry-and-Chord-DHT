@@ -1,20 +1,21 @@
 import hashlib
 import random
+from constants import b
+from urllib3.connectionpool import xrange
 
 class MyNode:	
-	nodeCount = 0
-	# N = 
 
+	id = 0
+	
 	def __init__(self, ipAddress):
 		#b = MyNode.b
-		MyNode.nodeCount += 1
 
-		#self.routingTable = [[None for x in xrange(2**b)] for x in xrange(32)] 
+		self.routingTable = [[None for x in xrange(2**b)] for x in xrange(32)]
 		#self.leafSet = [None for x in xrange(2**(b+1))]
 		#self.neighborhoodSet = [None for x in xrange(2**b)]
 		
-		self.routingTable = [[]]
-		self.lowLeafSet = []
+		#self.routingTable = []
+		self.downLeafSet = []
 		self.upLeafSet = []
 		self.neighborhoodSet = []
 		self.isNodeActive = True
@@ -26,9 +27,14 @@ class MyNode:
 		temp = temp.encode('utf-8')
 		self.nodeKey = hashlib.md5(temp).hexdigest()
 		
+		MyNode.id += 1
+		self.id = MyNode.id
+		self.routePath = []
+		
 	def __str__(self):
-		return self.nodeKey
+		return str(self.id) + " : " + str(self.nodeKey)
 	
+	'''
 	def __del__(self):
-		'''print "Deleting: " + str(self)'''
-
+		''''''print "Deleting: " + str(self)'''''''
+	'''

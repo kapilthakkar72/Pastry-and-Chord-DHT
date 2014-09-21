@@ -1,6 +1,6 @@
-from math import sqrt
+from math import ceil
+import math
 
-d = [[1,2,4],[4,5,5]]
+rowsShallBeFilled = ceil(math.log(1,16))*16
 
-
-print sqrt(- (6-4)**2 + (4-3)**2)
+print (rowsShallBeFilled)
