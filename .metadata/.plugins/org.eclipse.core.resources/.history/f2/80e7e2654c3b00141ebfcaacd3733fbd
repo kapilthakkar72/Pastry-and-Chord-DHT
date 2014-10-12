@@ -1,0 +1,48 @@
+import random
+import os.path
+
+def generateIpAddress():
+	return int(ipPart() + ipPart() + ipPart() + ipPart())
+	
+	
+def ipPart():
+	return str(random.randint(0, 255))
+
+def shl(k1, k2):
+	tempList = [str(k1), str(k2)]
+	return len(os.path.commonprefix(tempList))
+
+def hexToInt(hexVal):
+	return int(hexVal, 16)
+
+def isNodeAlive(N):
+	return N != None and N.isNodeActive
+
+def getDistance(A1, A2):
+	return int(A1.nodeKey) - int(A2.nodeKey)
+
+def getMinDistNode(nodeSet, X):
+	minDist = 100000
+	nearestNode = None
+	for node in nodeSet:
+		dist = getDistance(X, node)
+		if (minDist > dist):
+			minDist = dist
+			nearestNode = node
+	return nearestNode
+
+def getMaxDistNode(nodeSet, X):
+	maxDist = 0
+	nearestNode = None
+	for node in nodeSet:
+		dist = getDistance(X, node)
+		if (minDist > dist):
+			minDist = dist
+			nearestNode = node
+	return nearestNode
+
+def getMinLeaf(leafSet):
+	pass
+
+def getMaxLeaf(leafSet):
+	pass

@@ -1,0 +1,4 @@
+A = [1,7,3]
+
+if 7 in A:
+    print "reached"

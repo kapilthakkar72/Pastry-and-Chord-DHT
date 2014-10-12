@@ -1,0 +1,14 @@
+import time
+
+i = time.time()
+for j in range(0,1000):
+    for k in range(0,1000):
+        for l in range(0,1000):
+            for m in range(0,1000):
+                for n in range(0,1000):
+                    k=0
+
+
+j = time.time()
+
+print ("time elapsed: " + str(int(j-i)))

@@ -1,0 +1,8 @@
+import time
+
+i = time.time()
+for j in range(0,1000):
+    print ""
+
+
+j = time.time()

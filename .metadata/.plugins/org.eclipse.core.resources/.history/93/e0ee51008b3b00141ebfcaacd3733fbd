@@ -1,0 +1,89 @@
+import random
+import os.path
+from math import sqrt
+from constants import INFINITY
+
+def generateIpAddress():
+	return int(ipPart() + ipPart() + ipPart() + ipPart())	
+	
+def ipPart():
+	return str(random.randint(0, 255))
+
+def shl(k1, k2):
+	tempList = [str(k1), str(k2)]
+	return len(os.path.commonprefix(tempList))
+
+def hexToInt(hexVal):
+	return int(hexVal, 16)
+
+def isNodeAlive(N):
+	return N != None and N.isNodeActive
+
+def getNumericDistance(A1, A2):
+	if not(isNodeAlive(A1)) or not(isNodeAlive(A2)):
+		print "Inside getNumericDistance : either of the node is not alive"
+		return INFINITY  # returning INFINITY if either of the node is not alive
+	return abs(int(A1.nodeKey, 16) - int(A2.nodeKey, 16))
+
+def getRelativeDistance(A1, A2):
+	if not(isNodeAlive(A1)) or not(isNodeAlive(A2)):
+		print "Inside getRelativeDistance : either of the node is not alive"
+		return INFINITY  # returning INFINITY if either of the node is not alive
+	
+	yDiff = A1.coordinates[1] - A2.coordinates[1]
+	xDiff = A1.coordinates[0] - A2.coordinates[0]
+	tmpVar = abs(yDiff ** 2 - xDiff ** 2)
+	return sqrt(tmpVar)
+
+# Used to find the neighbors
+def getClosestNode(nodeSet, X):
+	minDist = INFINITY
+	closestNode = None
+	for node in nodeSet:
+		if(isNodeAlive(node)):
+			dist = getRelativeDistance(X, node)
+			if (minDist > dist):
+				minDist = dist
+				closestNode = node
+	return closestNode
+		
+# returns the numerically closest node
+def getMinDistNode(nodeSet, X):
+	minDist = INFINITY
+	nearestNode = None
+	for node in nodeSet:
+		if(isNodeAlive(node)):
+			dist = getNumericDistance(X, node)
+			if (minDist > dist):
+				minDist = dist
+				nearestNode = node
+	return nearestNode
+
+def getMaxDistNode(nodeSet, X):
+	maxDist = 0
+	farthestNode = None
+	for node in nodeSet:
+		if(isNodeAlive(node)):
+			dist = getNumericDistance(X, node)
+			if (maxDist < dist):
+				maxDist = dist
+				farthestNode = node
+	return farthestNode
+
+def getMinLeaf(A):
+	return getMaxDistNode(A.lowLeafSet, A)  # minLeaf will have the max distance
+
+def getMaxLeaf(A):
+	return getMaxDistNode(A.upLeafSet, A)  # maxLeaf will have the max distance
+
+def getRouteTableEntry(A, row, col):
+	try:
+		A.routingTable[row][col]
+	except IndexError:
+		return None
+
+def getRouteTableRow(A, row):
+	try:
+		A.routingTable[row][col]
+	except IndexError:
+		return None

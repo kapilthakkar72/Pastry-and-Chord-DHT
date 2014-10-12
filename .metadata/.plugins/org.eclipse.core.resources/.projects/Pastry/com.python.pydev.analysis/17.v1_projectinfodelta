@@ -1,0 +1,16 @@
+INSTUPmain
+/home/harinder/Desktop/CSL860/ADS_Assignment1/Pastry/main.py
+INFOS:&&2|1|2|0&&2|3|2|0&&2|4|2|0&&2|5|2|0&&2|6|2|0&&2|7|2|0&&2|8|2|0&&2|9|2|0&&2|10|2|0&&2|11|2|0&&2|12|2|0&&2|13|2|0
+addNewNode=1
+noisyDeleteNode=5
+addNodes=7
+noisyDeleteNodes=12
+main=2
+silentDeleteNode=4
+getRandomNode=6
+getAvg=10
+silentDeleteNodes=11
+lookUp=3
+lookUpsGetAccesses=9
+getAvgRouteTableOccupancy=13
+lookUpsGetHops=8

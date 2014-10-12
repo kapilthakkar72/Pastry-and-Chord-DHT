@@ -1,0 +1,24 @@
+a = 5
+
+b = "ffd"
+
+c = [1,3,4]
+
+d = [[1,2,4][4,5,5]]
+
+
+print "dffs"
+
+
+
+def abc(fefe, fef, fef):
+    
+    return fef, fef, fefe
+
+
+c[-1]
+
+hex(3)
+
+int("32")
+

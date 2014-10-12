@@ -1,0 +1,8 @@
+A = [1,7,3]
+
+if 9 in A:
+    print "reached"
+    
+print A[-1]
+
+A.remove(7)

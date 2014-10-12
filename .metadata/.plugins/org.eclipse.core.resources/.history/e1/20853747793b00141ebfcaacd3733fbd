@@ -1,0 +1,6 @@
+nodes = []
+b = 4
+leafSetLen = 2**(b+1)
+lowLeafSetLen = 2**(b)
+upLeafSetLen = 2**(b)
+neighborSetLen = 2**(b+1)

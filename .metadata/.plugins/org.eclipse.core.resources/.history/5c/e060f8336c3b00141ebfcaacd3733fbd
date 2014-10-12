@@ -1,0 +1,7 @@
+
+d = [[1,2,4],[4,5,5]]
+
+
+for dd in d:
+    if 2 in dd:
+        print "dsds"

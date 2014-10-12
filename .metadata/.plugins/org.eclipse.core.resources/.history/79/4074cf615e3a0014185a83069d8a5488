@@ -1,0 +1,43 @@
+'''from node import MyNode
+import helper
+
+
+X = MyNode(helper.generateIpAddress())
+Y = MyNode(helper.generateIpAddress())
+
+list1 = [X,Y]
+l2 = [X]
+
+del X
+print list1[0].nodeKey
+print l2[0].nodeKey
+print X.nodeKey
+X.nodeKey = None
+#X = list.remove(X)
+
+print list1[0].nodeKey
+print l2[0].nodeKey
+'''
+
+i = hex(533)
+j = hex(423)
+h = hex(322)
+
+print "i: " + i + ", j: " + j + ", h: " + h
+
+
+print (hex(533-423))
+
+
+'''print "i: " + str(i)
+print "j: " + str(j)
+print "h: " + str(h)
+
+if(j >=h):
+    print "rech1"
+    
+if(j<=i):
+    print "rech2"
+
+if(j >=h and j<=i):
+    print "rech"'''

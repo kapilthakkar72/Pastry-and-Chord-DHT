@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Pastry/temp&apos; to &apos;temp.py&apos;" description="Rename resource &apos;temp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="temp" name="temp.py" stamp="1410082050851" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Pastry/Constants&apos; to &apos;constants.py&apos;" description="Rename resource &apos;Constants&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Constants" name="constants.py" stamp="1410085615080" updateReferences="true"/>
+</session>

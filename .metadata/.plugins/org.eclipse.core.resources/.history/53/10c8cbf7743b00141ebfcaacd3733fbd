@@ -1,0 +1,11 @@
+
+d = [[1,2,4],[4,5,5]]
+
+
+for dd in d:
+    try:
+        if 2 in dd:
+            print d.index(dd)
+            print dd.index(2)
+    except ValueError:
+        continue

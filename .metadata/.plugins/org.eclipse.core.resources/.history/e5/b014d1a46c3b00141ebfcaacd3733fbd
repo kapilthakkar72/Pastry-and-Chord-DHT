@@ -1,0 +1,8 @@
+
+d = [[1,2,4],[4,5,5]]
+
+
+for dd in d:
+    print dd.index(2)
+
+print dd.index(2)

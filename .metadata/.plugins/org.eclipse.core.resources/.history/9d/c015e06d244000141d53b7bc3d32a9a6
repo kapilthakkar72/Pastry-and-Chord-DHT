@@ -1,0 +1,2 @@
+from urllib3.connectionpool import xrange
+self.routingTable = [[None for x in xrange(2**b)] for x in xrange(32)]

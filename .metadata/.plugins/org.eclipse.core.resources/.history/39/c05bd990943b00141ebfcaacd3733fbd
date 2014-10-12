@@ -1,0 +1,8 @@
+r = []
+
+row = 1
+col = 2
+
+r[row][col] = 7
+
+rowsNeededCount = row - len(r)

@@ -1,0 +1,6 @@
+from math import ceil
+import math
+
+rowsShallBeFilled = ceil(math.log(100,16))*16
+
+print (rowsShallBeFilled)

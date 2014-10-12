@@ -1,0 +1,39 @@
+import operations
+import helper
+from node import MyNode
+from constants import nodes
+
+''''A = MyNode(helper.generateIpAddress())
+X = MyNode(helper.generateIpAddress())
+operations.route(A, X)'''
+
+def addNewNode():
+    # Randomly generating a new node
+    X = MyNode(helper.generateIpAddress())
+    print "coordinates: " + str(X.coordinates)
+    r = operations.add_node(X)
+    #if(r != -1):
+        #print "node: " + str(X) + " - added successfully"
+
+def lookUp(S, D):
+    return operations.route(S, D)
+
+def deleteNode(X):
+    operations.nodeDeleted(X)
+
+for i in range (0,2):
+    addNewNode()
+    if i%20 == 0:
+        print "reached: " + str(i)
+        '''print "I am here"'''
+
+for node in nodes:
+        print "\n"
+        print "nodeKey: " + node.nodeKey
+        
+        print "neighborhoodSet: " + str(node.neighborhoodSet)
+        print "downLeafSet: " + str(node.downLeafSet)
+        print "upLeafSet: " + str(node.upLeafSet)
+        
+        print "routingTable: " + str(node.routingTable)
+        

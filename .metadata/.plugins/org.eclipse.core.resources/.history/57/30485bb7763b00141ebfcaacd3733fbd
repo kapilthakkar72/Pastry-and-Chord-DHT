@@ -1,0 +1,18 @@
+import operations
+import helper
+from node import MyNode
+
+A = MyNode(helper.generateIpAddress())
+X = MyNode(helper.generateIpAddress())
+operations.route(A, X)
+
+def addNewNode():
+    # Randomly generating a new node
+    X = MyNode(helper.generateIpAddress())
+    r = operations.add_node(X)
+    if(r != -1):
+        print "node: " + str(X) + "added successfully"
+        
+def lookUp(S, D):
+    return operations.route(S, D)
+    

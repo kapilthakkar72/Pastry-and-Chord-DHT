@@ -1,0 +1,14 @@
+r = []
+
+row = 1
+col = 2
+
+r[row][col] = 7
+
+rowsNeededCount = row - len(r) + 1
+colsNeededCount = col
+
+for i in range(0, rowsNeededCount):
+    r.append([])
+    
+print r

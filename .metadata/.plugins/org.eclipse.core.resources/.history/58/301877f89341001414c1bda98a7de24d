@@ -1,0 +1,3 @@
+from math import ceil
+import math
+rowsShallBeFilled = ceil(math.log(len(nodes),16))*constants.b
