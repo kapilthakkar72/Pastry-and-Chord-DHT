@@ -12,7 +12,7 @@ The aim of this project is to compare Pastry & Chord DHT. Both are simulated & t
 	<li>Efficacy per routing</li><br>
 	<li>Routing table occupancy</li><br>
 </ul>	
-	<br><br>
+<br>
 <b>Chord:</b><br>
 <ul>
 	<li>Average number of hops per lookup operation</li><br>
@@ -21,6 +21,6 @@ The aim of this project is to compare Pastry & Chord DHT. Both are simulated & t
 	<li>Average time to perform addition</li><br>
 	<li>Average time to perform deletion</li><br>
 </ul>
-<br><br>
+<br>
 Please go through "Docs/pastry-chord-simulation.pdf" for the detailed analysis.
 
