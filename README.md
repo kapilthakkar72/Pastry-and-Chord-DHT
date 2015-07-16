@@ -23,5 +23,5 @@ The aim of this project is to compare Pastry & Chord DHT. Both are simulated & t
 </ul>
 <br>
 Please go through "Docs/pastry-chord-simulation.pdf" for the detailed report.<br>
-Pastry Paper - http://privateweb.iitd.ac.in/~srsarangi/docs/dist/pastry.pdf<br>
-Chord Paper - http://privateweb.iitd.ac.in/~srsarangi/docs/dist/chord.pdf
+Pastry Paper - http://www.freepastry.org/PAST/pastry.pdf<br>
+Chord Paper - http://pdos.csail.mit.edu/papers/chord:sigcomm01/chord_sigcomm.pdf
