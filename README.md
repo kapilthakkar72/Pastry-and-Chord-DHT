@@ -22,6 +22,6 @@ The aim of this project is to compare Pastry & Chord DHT. Both are simulated & t
 	<li>Average time to perform deletion</li>
 </ul>
 <br>
-Please go through "Docs/pastry-chord-simulation.pdf" for the detailed report.
-Pastry Paper - http://privateweb.iitd.ac.in/~srsarangi/docs/dist/pastry.pdf
+Please go through "Docs/pastry-chord-simulation.pdf" for the detailed report.<br>
+Pastry Paper - http://privateweb.iitd.ac.in/~srsarangi/docs/dist/pastry.pdf<br>
 Chord Paper - http://privateweb.iitd.ac.in/~srsarangi/docs/dist/chord.pdf
