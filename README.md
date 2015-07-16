@@ -5,22 +5,23 @@ The aim of this project is to compare Pastry & Chord DHT. Both are simulated & t
 <br><br>
 <b>Pastry:</b><br>
 <ul>
-	<li>Average number of routing hops</li><br>
-	<li>Average number of messages for node addition</li><br>
-	<li>Node Failures</li><br>
-	<li>Time per operation</li><br>
-	<li>Efficacy per routing</li><br>
-	<li>Routing table occupancy</li><br>
+	<li>Average number of routing hops</li>
+	<li>Average number of messages for node addition</li>
+	<li>Node Failures</li>
+	<li>Time per operation</li>
+	<li>Efficacy per routing</li>
+	<li>Routing table occupancy</li>
 </ul>	
 <br>
 <b>Chord:</b><br>
 <ul>
-	<li>Average number of hops per lookup operation</li><br>
-	<li>Average number of updates per addition</li><br>
-	<li>Average number of updates per deletion</li><br>
-	<li>Average time to perform addition</li><br>
-	<li>Average time to perform deletion</li><br>
+	<li>Average number of hops per lookup operation</li>
+	<li>Average number of updates per addition</li>
+	<li>Average number of updates per deletion</li>
+	<li>Average time to perform addition</li>
+	<li>Average time to perform deletion</li>
 </ul>
 <br>
 Please go through "Docs/pastry-chord-simulation.pdf" for the detailed report.
-
+Pastry Paper - http://privateweb.iitd.ac.in/~srsarangi/docs/dist/pastry.pdf
+Chord Paper - http://privateweb.iitd.ac.in/~srsarangi/docs/dist/chord.pdf
